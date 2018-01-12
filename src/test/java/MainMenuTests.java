@@ -1,17 +1,26 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class MainMenuTests {
 
+    private Menu menu;
+    private PrintStream printStream = mock(PrintStream.class);;
+
+    @Before
+    public void setUp(){
+
+        String[] options = {"List Books"};
+        menu = new Menu(printStream,options);
+    }
+
     @Test
     public void menuShouldDisplay(){
-        String[] options = {"List Books"};
-        PrintStream printStream = mock(PrintStream.class);
-        Menu menu = new Menu(printStream,options);
 
 
         menu.displayOptions();
@@ -21,14 +30,20 @@ public class MainMenuTests {
     }
     @Test
     public void whenUserSelectsListBooksListBooksIsCalled(){
-        String[] options = {"List Books"};
-        PrintStream printStream = mock(PrintStream.class);
-        Menu menu = new Menu(printStream,options);
         menu.displayOptions();
 
 
 
     }
 
+    @Test
+    public void listBooksShouldBeCalledWhenOptionsOneIsSelected(){
+        Biblioteca biblioteca = mock(Biblioteca.class);
+
+        menu.selectOption(biblioteca,1);
+
+        verify(biblioteca).listBooks();
+
+    }
 
 }

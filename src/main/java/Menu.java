@@ -15,4 +15,8 @@ public class Menu {
             printStream.println(i+1 + ": " + options[i]);
         }
     }
+
+    public void selectOption(Biblioteca biblioteca, int option) {
+        biblioteca.listBooks();
+    }
 }
