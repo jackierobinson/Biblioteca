@@ -39,5 +39,11 @@ public class BibliotecaTests {
 
     }
 
+    @Test
+    public void shouldCallSelectOptionAfterUserInput(){
+        Menu menu = mock(Menu.class);
+
+    }
+
 
 }
