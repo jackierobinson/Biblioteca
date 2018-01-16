@@ -16,13 +16,15 @@ public class MenuTests {
     private Menu menu;
     private PrintStream printStream = mock(PrintStream.class);
     private Biblioteca biblioteca = mock(Biblioteca.class);
+    private final BufferedReader bufferedReader = mock(BufferedReader.class);
 
 
     @Before
     public void setUp(){
 
         String[] options = {"List Books"};
-        menu = new Menu(printStream,options);
+
+        menu = new Menu(printStream,options,bufferedReader, biblioteca);
     }
 
     @Test

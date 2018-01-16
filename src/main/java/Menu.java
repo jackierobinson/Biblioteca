@@ -7,12 +7,16 @@ import java.util.ArrayList;
 public class Menu {
     private final String[] options;
     private final PrintStream printStream;
+    private final BufferedReader bufferedReader;
+    private final Biblioteca biblioteca;
 
 
-    public Menu(PrintStream printStream, String[] options) {
+
+    public Menu(PrintStream printStream, String[] options, BufferedReader bufferedReader, Biblioteca biblioteca) {
         this.options = options;
         this.printStream = printStream;
-
+        this.bufferedReader = bufferedReader;
+        this.biblioteca = biblioteca;
     }
     
     public void displayOptions() {
@@ -58,14 +62,19 @@ public class Menu {
         books.add(new Book("Harry Potter", "J.K. Rowling", "1995"));
         Biblioteca biblioteca = new Biblioteca(System.out,books);
 
-        Menu menu = new Menu(printStream, new String[]{"List Books"});
+        Menu menu = new Menu(printStream, new String[]{"List Books"}, bufferedReader, biblioteca);
 
-        menu.displayWelcomeMessage();
-
-        menu.displayOptions();
-        int userInput = menu.getUserInput(bufferedReader);
-        menu.selectOption(biblioteca, userInput);
+        menu.run();
     }
+
+    public void run(){
+        displayWelcomeMessage();
+
+        displayOptions();
+        int userInput = getUserInput(bufferedReader);
+        selectOption(biblioteca, userInput);
+    }
+
     public void displayWelcomeMessage() {
         printStream.println("Welcome to Biblioteca");
     }
