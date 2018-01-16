@@ -81,14 +81,13 @@ public class Menu {
             int userInput = getUserInput(bufferedReader);
             shouldRun = selectOption(userInput);
         }
+
+        printStream.println("Goodbye!");
+
     }
 
     public void displayWelcomeMessage() {
         printStream.println("Welcome to Biblioteca");
     }
 
-    public void quit() {
-        printStream.println("Goodbye!");
-
-    }
 }

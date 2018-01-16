@@ -21,7 +21,7 @@ public class MenuTests {
     @Before
     public void setUp(){
 
-        String[] options = {"List Books"};
+        String[] options = {"List Books", "Quit"};
 
         menu = new Menu(printStream,options,bufferedReader, biblioteca);
     }
@@ -84,9 +84,10 @@ public class MenuTests {
     }
 
     @Test
-    @Ignore
     public void shouldDisplayGoodbyeWhenUserQuits(){
-        menu.quit();
+        menu = spy(menu);
+        doReturn(2).when(menu).getUserInput(bufferedReader);
+        menu.run();
         verify(printStream).println("Goodbye!");
     }
 
@@ -104,7 +105,7 @@ public class MenuTests {
     public void shouldExitAppWhenUserSelectsOptionTwo(){
         boolean result = menu.selectOption(2);
 
-        assertEquals(true, result);
+        assertEquals(false, result);
     }
 
 }
