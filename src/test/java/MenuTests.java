@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class MainMenuTests {
+public class MenuTests {
 
     private Menu menu;
     private PrintStream printStream = mock(PrintStream.class);
@@ -79,6 +79,28 @@ public class MainMenuTests {
         int result = menu.getUserInput(bufferedReader);
 
         assertEquals(1,result);
+    }
+
+    /*
+    @Test
+    public void shouldExitAppWhenUserSelectsOptionTwo(){
+        menu.selectOption(biblioteca, 2);
+
+        //verify(biblioteca).quit();
+    }
+    */
+    @Test
+    public void shouldDisplayWelcomeMessageWhenAppStarts(){
+        String message = "Welcome to Biblioteca";
+        menu.displayWelcomeMessage();
+
+        verify(printStream).println("Welcome to Biblioteca");
+    }
+
+    @Test
+    public void shouldDisplayGoodbyeWhenUserQuits(){
+        menu.quit();
+        verify(printStream).println("Goodbye!");
     }
 
 }
