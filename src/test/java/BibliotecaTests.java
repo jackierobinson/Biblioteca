@@ -19,14 +19,7 @@ public class BibliotecaTests {
         biblioteca = new Biblioteca(printstream, books);
     }
 
-    @Test
-    public void shouldDisplayWelcomeMessageWhenAppStarts(){
-        String message = "Welcome to Biblioteca";
 
-        biblioteca.displayWelcomeMessage();
-
-        verify(printstream).println("Welcome to Biblioteca");
-    }
 
     @Test
     public void shouldDisplayBooksAfterWelcomeMessage() {
