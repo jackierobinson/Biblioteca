@@ -20,6 +20,8 @@ public class Menu {
     }
 
     public void selectOption(Biblioteca biblioteca, int option) {
+
+
         if (optionsIsInvalid(option)){
             printStream.println("Invalid Menu Option");
         }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -70,5 +71,14 @@ public class MainMenuTests {
         verify(printStream).println("Invalid Menu Option");
     }
 
+    @Test
+    public void getUserInputShouldReturnIntWhenGivenIntegerString() throws IOException {
+        BufferedReader bufferedReader = mock(BufferedReader.class);
+        when(bufferedReader.readLine()).thenReturn("1");
+
+        int result = menu.getUserInput(bufferedReader);
+
+        assertEquals(1,result);
+    }
 
 }
