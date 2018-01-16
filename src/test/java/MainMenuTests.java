@@ -64,7 +64,7 @@ public class MainMenuTests {
     public void  shouldGiveInvalidOptionErrorIfNotANumber() throws IOException {
 
         BufferedReader bufferedReader = mock(BufferedReader.class);
-        when(bufferedReader.readLine()).thenReturn("String");
+        when(bufferedReader.readLine()).thenReturn("String").thenReturn("1");
         menu.getUserInput(bufferedReader);
 
         verify(printStream).println("Invalid Menu Option");

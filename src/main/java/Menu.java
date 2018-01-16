@@ -33,14 +33,16 @@ public class Menu {
         return option<1 || option > options.length;
     }
 
-    public void getUserInput(BufferedReader bufferedReader) {
+    public int getUserInput(BufferedReader bufferedReader) {
 
-        try {
-            String userInput = bufferedReader.readLine();
-            Integer.parseInt(userInput);
+        while(true) {
+            try {
+                String userInput = bufferedReader.readLine();
+                return Integer.parseInt(userInput);
 
-        } catch (IOException | NumberFormatException e) {
-            printStream.println("Invalid Menu Option");
+            } catch (IOException | NumberFormatException e) {
+                printStream.println("Invalid Menu Option");
+            }
         }
     }
 }
