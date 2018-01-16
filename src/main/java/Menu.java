@@ -25,14 +25,19 @@ public class Menu {
         }
     }
 
-    public void selectOption(Biblioteca biblioteca, int option) {
+    public boolean selectOption(int option) {
 
 
         if (optionsIsInvalid(option)){
             printStream.println("Invalid Menu Option");
+            return true;
+        }
+        if(option == 2){
+            return false;
         }
         else {
             biblioteca.listBooks();
+            return true;
         }
 
     }
@@ -62,17 +67,20 @@ public class Menu {
         books.add(new Book("Harry Potter", "J.K. Rowling", "1995"));
         Biblioteca biblioteca = new Biblioteca(System.out,books);
 
-        Menu menu = new Menu(printStream, new String[]{"List Books"}, bufferedReader, biblioteca);
+        Menu menu = new Menu(printStream, new String[]{"List Books", "Quit"}, bufferedReader, biblioteca);
 
         menu.run();
     }
 
     public void run(){
         displayWelcomeMessage();
+        boolean shouldRun = true;
 
-        displayOptions();
-        int userInput = getUserInput(bufferedReader);
-        selectOption(biblioteca, userInput);
+        while(shouldRun){
+            displayOptions();
+            int userInput = getUserInput(bufferedReader);
+            shouldRun = selectOption(userInput);
+        }
     }
 
     public void displayWelcomeMessage() {
@@ -81,5 +89,6 @@ public class Menu {
 
     public void quit() {
         printStream.println("Goodbye!");
+
     }
 }

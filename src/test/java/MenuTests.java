@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -7,9 +8,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MenuTests {
 
@@ -29,8 +28,6 @@ public class MenuTests {
 
     @Test
     public void menuShouldDisplay(){
-
-
         menu.displayOptions();
 
         verify(printStream).println("1: List Books");
@@ -39,9 +36,7 @@ public class MenuTests {
 
     @Test
     public void listBooksShouldBeCalledWhenOptionsOneIsSelected(){
-        Biblioteca biblioteca = mock(Biblioteca.class);
-
-        menu.selectOption(biblioteca,1);
+        menu.selectOption(1);
 
         verify(biblioteca).listBooks();
 
@@ -49,23 +44,20 @@ public class MenuTests {
 
     @Test
     public void shouldGiveInvalidOptionErrorIfOutofRange(){
-
-        menu.selectOption(biblioteca, 3);
+        menu.selectOption(3);
 
         verify(printStream).println("Invalid Menu Option");
     }
 
     @Test
     public void shouldGiveInvalidOptionErrorIfNegative(){
-
-        menu.selectOption(biblioteca, -3);
+        menu.selectOption(-3);
 
         verify(printStream).println("Invalid Menu Option");
     }
 
     @Test
     public void  shouldGiveInvalidOptionErrorIfNotANumber() throws IOException {
-
         BufferedReader bufferedReader = mock(BufferedReader.class);
         when(bufferedReader.readLine()).thenReturn("String").thenReturn("1");
         menu.getUserInput(bufferedReader);
@@ -83,14 +75,6 @@ public class MenuTests {
         assertEquals(1,result);
     }
 
-    /*
-    @Test
-    public void shouldExitAppWhenUserSelectsOptionTwo(){
-        menu.selectOption(biblioteca, 2);
-
-        //verify(biblioteca).quit();
-    }
-    */
     @Test
     public void shouldDisplayWelcomeMessageWhenAppStarts(){
         String message = "Welcome to Biblioteca";
@@ -100,9 +84,27 @@ public class MenuTests {
     }
 
     @Test
+    @Ignore
     public void shouldDisplayGoodbyeWhenUserQuits(){
         menu.quit();
         verify(printStream).println("Goodbye!");
+    }
+
+    @Test
+    @Ignore
+    public void shouldDisplayOptionsAfterOptionIsSelected(){
+        menu = spy(menu);
+        when(menu.getUserInput(bufferedReader)).thenReturn(1);
+        menu.run();
+        verify(menu).displayOptions();
+    }
+
+
+    @Test
+    public void shouldExitAppWhenUserSelectsOptionTwo(){
+        boolean result = menu.selectOption(2);
+
+        assertEquals(true, result);
     }
 
 }
