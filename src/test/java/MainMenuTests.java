@@ -10,7 +10,9 @@ import static org.mockito.Mockito.verify;
 public class MainMenuTests {
 
     private Menu menu;
-    private PrintStream printStream = mock(PrintStream.class);;
+    private PrintStream printStream = mock(PrintStream.class);
+    private Biblioteca biblioteca = mock(Biblioteca.class);
+
 
     @Before
     public void setUp(){
@@ -40,25 +42,24 @@ public class MainMenuTests {
     }
 
     @Test
-
     public void shouldGiveInvalidOptionErrorIfOutofRange(){
-
-        Biblioteca biblioteca = mock(Biblioteca.class);
 
         menu.selectOption(biblioteca, 3);
 
         verify(printStream).println("Invalid Menu Option");
     }
+
     @Test
-
     public void shouldGiveInvalidOptionErrorIfNegative(){
-
-        Biblioteca biblioteca = mock(Biblioteca.class);
 
         menu.selectOption(biblioteca, -3);
 
         verify(printStream).println("Invalid Menu Option");
     }
+
+    //@Test
+    //public void  shouldGiveInvalidOptionErrorIfNotANumber(){
+    //}
 
 
 }
