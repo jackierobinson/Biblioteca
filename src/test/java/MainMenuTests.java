@@ -1,11 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MainMenuTests {
 
@@ -57,9 +60,15 @@ public class MainMenuTests {
         verify(printStream).println("Invalid Menu Option");
     }
 
-    //@Test
-    //public void  shouldGiveInvalidOptionErrorIfNotANumber(){
-    //}
+    @Test
+    public void  shouldGiveInvalidOptionErrorIfNotANumber() throws IOException {
+
+        BufferedReader bufferedReader = mock(BufferedReader.class);
+        when(bufferedReader.readLine()).thenReturn("String");
+        menu.getUserInput(bufferedReader);
+
+        verify(printStream).println("Invalid Menu Option");
+    }
 
 
 }

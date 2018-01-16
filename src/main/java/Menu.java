@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 public class Menu {
@@ -29,5 +31,16 @@ public class Menu {
 
     private boolean optionsIsInvalid(int option) {
         return option<1 || option > options.length;
+    }
+
+    public void getUserInput(BufferedReader bufferedReader) {
+
+        try {
+            String userInput = bufferedReader.readLine();
+            Integer.parseInt(userInput);
+
+        } catch (IOException | NumberFormatException e) {
+            printStream.println("Invalid Menu Option");
+        }
     }
 }
