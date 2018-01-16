@@ -28,13 +28,6 @@ public class MainMenuTests {
         verify(printStream).println("1: List Books");
 
     }
-    @Test
-    public void whenUserSelectsListBooksListBooksIsCalled(){
-        menu.displayOptions();
-
-
-
-    }
 
     @Test
     public void listBooksShouldBeCalledWhenOptionsOneIsSelected(){
@@ -46,6 +39,26 @@ public class MainMenuTests {
 
     }
 
+    @Test
+
+    public void shouldGiveInvalidOptionErrorIfOutofRange(){
+
+        Biblioteca biblioteca = mock(Biblioteca.class);
+
+        menu.selectOption(biblioteca, 3);
+
+        verify(printStream).println("Invalid Menu Option");
+    }
+    @Test
+
+    public void shouldGiveInvalidOptionErrorIfNegative(){
+
+        Biblioteca biblioteca = mock(Biblioteca.class);
+
+        menu.selectOption(biblioteca, -3);
+
+        verify(printStream).println("Invalid Menu Option");
+    }
 
 
 }
